@@ -628,10 +628,10 @@ public class AwesomeNotifications:
                         else {
                             if notificationDisplayed {
                                 if mustPlaySound {
-                                    completionHandler([.alert, .badge, .sound])
+                                    completionHandler((notificationModel.content?.presentAlert ?? true) ? [.alert, .badge, .sound] : [.badge, .sound])
                                 }
                                 else {
-                                    completionHandler([.alert, .badge])
+                                    completionHandler((notificationModel.content?.presentAlert ?? true) ? [.alert, .badge] : [.badge])
                                 }
                             }
                             else {

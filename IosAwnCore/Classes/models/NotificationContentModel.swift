@@ -54,6 +54,7 @@ public class NotificationContentModel : AbstractModel {
     public var displayedLifeCycle: NotificationLifeCycle?
     public var createdDate: RealDateTime?
     public var displayedDate: RealDateTime?
+    var presentAlert: Bool?
     
     public init(){}
     
@@ -160,6 +161,7 @@ public class NotificationContentModel : AbstractModel {
         self.displayedDate      = MapUtils<RealDateTime>.getRealDateOrDefault(reference: Definitions.NOTIFICATION_DISPLAYED_DATE, arguments: arguments, defaultTimeZone: RealDateTime.utcTimeZone)
         
         self.payload  = MapUtils<[String:String?]>.getValueOrDefault(reference: Definitions.NOTIFICATION_PAYLOAD, arguments: arguments)
+        self.presentAlert = MapUtils<Bool>.getValueOrDefault(reference: "presentAlert", arguments: arguments)
         
         if StringUtils.shared.isNullOrEmpty(self.bigPicture, considerWhiteSpaceAsEmpty: true) {
             self.largeIcon = nil
@@ -209,6 +211,7 @@ public class NotificationContentModel : AbstractModel {
         if(self.createdDate != nil){ mapData[Definitions.NOTIFICATION_CREATED_DATE] = self.createdDate!.description }
         if(self.displayedDate != nil){ mapData[Definitions.NOTIFICATION_DISPLAYED_DATE] = self.displayedDate!.description  }
         if(self.payload != nil){ mapData[Definitions.NOTIFICATION_PAYLOAD] = self.payload }
+        if(self.presentAlert != nil){ mapData["presentAlert"] = self.presentAlert }
 
         return mapData
     }

@@ -161,6 +161,8 @@ public class NotificationBuilder {
         setWakeUpScreen(notificationModel: notificationModel, content: content)
         setCriticalAlert(channel: channel, content: content)
         
+        setAlert(notificationModel: notificationModel, channel: channel, content: content)
+        
         setUserInfoContent(notificationModel: notificationModel, content: content)
         
         notificationModel.nextValidDate = nextDate
@@ -441,6 +443,12 @@ public class NotificationBuilder {
             
             default:
             break
+        }
+    }
+    
+    private func setAlert(notificationModel:NotificationModel, channel:NotificationChannelModel, content:UNMutableNotificationContent){
+            if ((notificationModel.content!.presentAlert ?? true) == false) {
+                content.userInfo["presentAlert"] = false
         }
     }
     
